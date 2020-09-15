@@ -1,19 +1,19 @@
 package com.company;
 
 import java.io.*;
-import java.lang.reflect.Array;
+/*import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map;*/
 
-public class Main<Length1> {
+public class Main {
 
 
     public static void main(String[] args) throws IOException {//io异常抛出
         // write your code here
-     //   ArrayList list = new ArrayList();
-    //    args = new String[3]; 
+        //   ArrayList list = new ArrayList();
+        //    args = new String[3];
         String filepath = args[0];
         File file = new File(filepath);
         File file2 = new File(args[1]);
@@ -34,79 +34,23 @@ public class Main<Length1> {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-        BufferedReader f1 = new BufferedReader(new InputStreamReader(new  FileInputStream(file)));
-        BufferedReader f2 = new BufferedReader(new InputStreamReader(new  FileInputStream(file2)));
-        String  s = new String();
-        String Str1 ="";
-        String Str2 ="";
-        while((s = f1.readLine()) != null){//将文本转化为String
-            Str1 += s +"\r\n" ;
-        }
-        while ((s = f2.readLine())!=null){
-            Str2 += s +"\r\n" ;
-        }
-      //  System.out.println(Str1.toString());
-      //  System.out.println(Str2.toString());
-        //length
-        int Length1 = Str1.length();
-        int Length2 = Str2.length();//编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符
-          int ed = getEd(Str1,Str2,Length1,Length2);//获得最小编辑距离（动态规划）
-         double ans=1-1.0*ed/Math.max(Length1,Length2);//求得相似度
-       // double bb = getSimilarity(Str_1,Str_2);余弦定理方法
-        String ans1 =String.format("%.2f",ans);
-        System.out.println(ans1);
-        try (FileWriter writer = new FileWriter(file3)) {
-            writer.write(ans1);
-            writer.close();
-        } catch (Exception e) {
+        try {
+            throw new NullTextException("null text");
+        }catch (NullTextException e){
             e.printStackTrace();
         }
-
+        String Str1 =io.read(file);
+        String Str2 =io.read(file2);
+    //编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符
+        int ed = ED.getEd(Str1, Str2, Str1.length(), Str2.length());//获得最小编辑距离（动态规划）
+        double ans = 1 - 1.0 * ed / Math.max(Str1.length(), Str2.length());//求得相似度
+        // double bb = getSimilarity(Str_1,Str_2);余弦定理方法
+        io.write(ans,file3);
+        MainTest.testEd();
     }
-    public static int getEd(String str1,String str2,int l1, int l2){//动态规划求最小编辑距离
-        int Distance=0;
-        int ed = 0;
-        if(l1!=0&&l2!=0){
-            int[][] Distance_shuzu=new int[l1+1][l2+1];
-            //编号
-            int Bianhao=0;
-            for (int i = 0; i <= l1; i++) {//初始化，给每个字符编号
-                Distance_shuzu[i][0]=Bianhao;
-                Bianhao++;
-            }
-            Bianhao=0;
-            for (int i = 0; i <=l2; i++) {
-                Distance_shuzu[0][i]=Bianhao;
-                Bianhao++;
-            }
 
 
-            char[] Str1_CharArray=str1.toCharArray();
-            char[] Str2_CharArray=str2.toCharArray();
-            for (int i = 1; i <= l1; i++) {
-                for(int j=1;j<=l2;j++){
-                    if(Str1_CharArray[i-1]==Str2_CharArray[j-1]){
-                        Distance=0;
-                    }
-                    else{
-                        Distance=1;
-                    }
 
-                    int Temp1=Distance_shuzu[i-1][j]+1;//增
-                    int Temp2=Distance_shuzu[i][j-1]+1;//减
-                    int Temp3=Distance_shuzu[i-1][j-1]+Distance;//改
-
-                    Distance_shuzu[i][j]=Math.min(Temp1,Temp2);//找最小的一步
-                    Distance_shuzu[i][j]=Math.min(Temp3,Distance_shuzu[i][j]);
-
-                }
-
-            }
-
-            ed=Distance_shuzu[l1][l2];
-        }
-        return ed;
-    }
    /*public static int  getEd2(String str1,String str2,int l1, int l2){
  //StackOverflowError堆栈溢出异常，递归不能用
         int op1 = getEd2(str1,str2,l1-1,l2)+1;
@@ -165,10 +109,11 @@ public class Main<Length1> {
                sq2 += c[1] * c[1];      //Z2n1^2+z2n2^2+..
            }
            return denuminator / (Math.sqrt(sq1) * Math.sqrt(sq2));//余弦定理
-       }
+       }}*/
 
     public static boolean isHanZi(char ch) {
         // 判断是否汉字
         return (ch >= 0x4E00 && ch <= 0x9FA5);
-    }*/
+
+    }
 }
