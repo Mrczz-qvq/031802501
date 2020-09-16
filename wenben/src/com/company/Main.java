@@ -10,7 +10,7 @@ import java.util.Map;*/
 public class Main {
 
 
-    public static void main(String[] args) throws IOException {//io异常抛出
+    public static void main(String[] args) throws IOException,NullTextException {//io异常抛出
         // write your code here
         //   ArrayList list = new ArrayList();
         //    args = new String[3];
@@ -34,6 +34,8 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+        File test = new File("src/sim_0.8/tese.txt");
+        if(test.length() == 0)
         try {
             throw new NullTextException("null text");
         }catch (NullTextException e){
