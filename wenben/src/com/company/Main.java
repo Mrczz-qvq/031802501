@@ -34,13 +34,13 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-        File test = new File("src/sim_0.8/tese.txt");
+        /*File test = new File("src/sim_0.8/tese.txt");测试异常
         if(test.length() == 0)
         try {
             throw new NullTextException("null text");
         }catch (NullTextException e){
             e.printStackTrace();
-        }
+        }*/
         String Str1 =io.read(file);
         String Str2 =io.read(file2);
     //编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符

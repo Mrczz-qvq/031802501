@@ -23,7 +23,7 @@ public class ED {
             char[] Str2_CharArray = str2.toCharArray();
             for (int i = 1; i <= l1; i++) {
                 for (int j = 1; j <= l2; j++) {
-                    if (Str1_CharArray[i - 1] == Str2_CharArray[j - 1]) {
+                    if (Str1_CharArray[i - 1] == Str2_CharArray[j - 1]) {//相同不变
                         Distance = 0;
                     } else {
                         Distance = 1;
